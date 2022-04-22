@@ -6,19 +6,7 @@
     - name: get join command
       shell: kubeadm token create --print-join-command
       register: join_command_raw
-    - debug: msg="{{ join_command_raw }}"
     - name: set join command
       set_fact:
         join_command: "{{ join_command_raw.stdout_lines[0] }}"
     - debug: msg="{{ join_command }}"
-
-- hosts: kube-nodes
-  become: yes
-  tasks:
-    - name: join cluster
-      shell: "{{ hostvars['control1'].join_command }} >> node_joined.txt"
-    - debug: msg="{{ node_joined.txt }}"
-#      shell: kubeadm join 10.3.0.6:6443 --token nncxve.rzlgo0wp2t20qinr --discovery-token-ca-cert-hash sha256:62a9db148daab97316a99f0b433f37e3c0f61836bf8ef96ed905a95eed45f6b9
-#      args:
-#        chdir: $HOME
-#        creates: node_joined.txt
