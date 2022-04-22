@@ -1,0 +1,9 @@
+[kube-master]
+control1 ansible_host=20.225.72.220 ansible_user=azureuser
+
+[kube-nodes]
+worker1 ansible_host=20.225.77.236 ansible_user=azureuser
+worker2 ansible_host=20.225.77.146 ansible_user=azureuser
+
+[all:vars]
+ansible_python_interpreter=/usr/bin/python3
