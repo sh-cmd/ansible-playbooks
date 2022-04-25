@@ -1,5 +1,0 @@
-mysql_deployment.yaml
-backend_deployment.yaml
-frontend_deployment.yaml
-volume.yaml
-
