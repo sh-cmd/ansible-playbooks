@@ -1,0 +1,8 @@
+rg_name = "test"
+location = "eastus"
+vnet_name = "test_vnet"
+cidr_vnet = "10.0.0.0/16"
+subnet_name = "test_subnet"
+cidr_subnet = "10.0.0.0/24"
+vm_size = "Standard_B2s"
+vm_name = "vm-linux"
