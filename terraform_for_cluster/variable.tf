@@ -5,4 +5,5 @@ variable "cidr_vnet" {}
 variable "subnet_name" {}
 variable "cidr_subnet" {}
 variable "vm_name" {}
-variable "vm_size" {}
+variable "vm_size_node" {}
+variable "vm_size_master" {}
