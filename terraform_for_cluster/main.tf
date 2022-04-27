@@ -17,8 +17,10 @@ module "virtual-machine-node" {
   subnet_id = module.vnet.subnet_id
   vm_name = "${var.vm_name}-${count.index}-node"
   vm_size    = var.vm_size_node
-  
+  ip_allocation_method = var.ip_allocation_method
+  pub_ip_name = "${var.pub_ip_name}-${count.index}-node"
 }
+
 module "virtual-machine-master" {
   source  = "./modules/vms"
   rg_name =   "${var.rg_name}"
@@ -26,4 +28,7 @@ module "virtual-machine-master" {
   subnet_id = module.vnet.subnet_id
   vm_name = "${var.vm_name}-master"
   vm_size    = var.vm_size_master
+  ip_allocation_method = var.ip_allocation_method
+  pub_ip_name = "${var.pub_ip_name}-master"
+
 }
