@@ -3,3 +3,8 @@ backend.zip
 ansible.cfg
 inventry
 .terraform
+terraform_for_cluster/.terraform.lock.hcl
+..gitignore.swp
+terraform_for_cluster/inventory
+terraform_for_cluster/terraform.tfstate
+terraform_for_cluster/terraform.tfstate.backup

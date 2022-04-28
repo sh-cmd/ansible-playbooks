@@ -28,24 +28,24 @@ resource "azurerm_virtual_machine" "main" {
   storage_image_reference {
     publisher = "Canonical"
     offer     = "UbuntuServer"
-    sku       = "20.04-LTS"
+    sku       = "18.04-LTS"
     version   = "latest"
   }
   storage_os_disk {
-    name              = "myosdisk1"
+    name              = "${var.os_disk_name}"
     caching           = "ReadWrite"
     create_option     = "FromImage"
     managed_disk_type = "Standard_LRS"
   }
   os_profile {
-    computer_name  = "hostname"
-    admin_username = "testadmin"
+    computer_name  = "azureuser"
+    admin_username = "azureuser"
   }
   os_profile_linux_config {
     disable_password_authentication = true
     ssh_keys {
         key_data = file("~/.ssh/id_rsa.pub")
-        path = "/home/testadmin/.ssh/authorized_keys"
+        path = "/home/azureuser/.ssh/authorized_keys"
     }
   }
   

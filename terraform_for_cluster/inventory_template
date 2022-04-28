@@ -1,0 +1,7 @@
+[master_node]
+master ansible_host=${master_ip_addrs} ansible_user=root
+
+[worker_node]
+%{ for index,addr in ip_addrs ~}
+${format("worker-%02d", index + 1)} ansible_host=${addr} ansible_user=root 
+%{ endfor ~}

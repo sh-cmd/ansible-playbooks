@@ -5,4 +5,5 @@ variable "subnet_id" {}
 variable "vm_size" {}
 variable "pub_ip_name" {}
 variable "ip_allocation_method" {}
+variable "os_disk_name" {}
 
