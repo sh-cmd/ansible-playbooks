@@ -3,4 +3,4 @@
   become: yes
   tasks:
     - name: join cluster
-      shell: "pwd"
+      shell: "whoami"
