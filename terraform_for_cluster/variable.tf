@@ -11,6 +11,8 @@ variable "pub_ip_name" {}
 variable "ip_allocation_method" {}
 variable "os_disk_name" {}
 variable "node_count" {}
+variable "computer_name" {}
+variable "private_ip_address_master" {}
 
 
 

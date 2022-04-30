@@ -1,5 +1,5 @@
 ---
-- hosts: kube-master
+- hosts: master_node
   become: yes
   gather_facts: false
   tasks:
@@ -10,3 +10,12 @@
       set_fact:
         join_command: "{{ join_command_raw.stdout_lines[0] }}"
     - debug: msg="{{ join_command }}"
+- hosts: worker_node
+  become: yes
+  gather_facts: false
+  tasks:
+    - name: join cluster
+      shell: "{{ hostvars['master'].join_command }} >> node_joined.txt"
+      args:
+        chdir: $HOME
+        creates: node_joined.txt

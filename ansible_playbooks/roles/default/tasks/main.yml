@@ -1,4 +1,4 @@
 - name: install apache and php
   apt:
     name: apache2
-    state: absent
+    state: present

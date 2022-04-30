@@ -23,6 +23,9 @@ module "virtual-machine-node" {
   ip_allocation_method = "${var.ip_allocation_method}"
   pub_ip_name = "${var.pub_ip_name}-${count.index}-node"
   os_disk_name = "${var.os_disk_name}-${count.index}-node"
+  computer_name = "${var.computer_name}-${count.index}-node"
+  private_ip_address = "10.0.${count.index}.6"
+
 }
 
 module "virtual-machine-master" {
@@ -38,6 +41,8 @@ module "virtual-machine-master" {
   ip_allocation_method = var.ip_allocation_method
   pub_ip_name = "${var.pub_ip_name}-master"
   os_disk_name = "${var.os_disk_name}-master"
+  computer_name = "${var.computer_name}-master"
+  private_ip_address = var.private_ip_address_master
 }
 
 

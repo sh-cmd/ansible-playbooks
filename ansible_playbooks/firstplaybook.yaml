@@ -1,5 +1,5 @@
 ---
-- hosts: kube-nodes
+- hosts: master_node
   become: true
   roles:
   - default

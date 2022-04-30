@@ -1,9 +1,9 @@
 ---
-- hosts: kube-master
+- hosts: master_node
   become: yes
   tasks:
     - name: initialize the cluster
-      shell: kubeadm init --apiserver-advertise-address=10.3.0.6 --pod-network-cidr=10.3.0.0/16 >> cluster_initialized.txt
+      shell: kubeadm init --apiserver-advertise-address=10.0.0.5 --pod-network-cidr=10.0.0.0/16 >> cluster_initialized.txt
       args:
         chdir: $HOME
         creates: cluster_initialized.txt
