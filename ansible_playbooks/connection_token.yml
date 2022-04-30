@@ -14,6 +14,8 @@
   become: yes
   gather_facts: false
   tasks:
+    - name: genrating delay
+      shell: sleep 30s
     - name: join cluster
       shell: "{{ hostvars['master'].join_command }} >> node_joined.txt"
       args:
