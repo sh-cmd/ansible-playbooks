@@ -1,6 +1,5 @@
 FrontEnd.zip 
 backend.zip
-ansible.cfg
 inventry
 .terraform
 terraform_for_cluster/.terraform.lock.hcl
