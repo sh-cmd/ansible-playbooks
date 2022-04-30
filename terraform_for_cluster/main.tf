@@ -47,7 +47,7 @@ module "virtual-machine-master" {
 
 
 resource "local_file" "hosts_cfg" {
-  content = templatefile("/home/shubham/Desktop/Devops_training/kubenetes_with_ansible/ansible-playbooks/terraform_for_cluster/inventory_template",
+  content = templatefile("inventory_template",
     { 
       master_ip_addrs = module.virtual-machine-master.public_ip
       ip_addrs = module.virtual-machine-node.*.public_ip
