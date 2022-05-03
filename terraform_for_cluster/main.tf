@@ -24,7 +24,7 @@ module "virtual-machine-node" {
   pub_ip_name = "${var.pub_ip_name}-${count.index}-node"
   os_disk_name = "${var.os_disk_name}-${count.index}-node"
   computer_name = "${var.computer_name}-${count.index}-node"
-  private_ip_address = "10.0.${count.index}.6"
+  private_ip_address = "${format("10.0.%03d.6", count.index + 1)}"
 
 }
 

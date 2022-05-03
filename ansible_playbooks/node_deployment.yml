@@ -1,0 +1,12 @@
+---
+- hosts: master_node
+  become: true
+  tasks:
+  - name: create volume
+    command: kubectl apply -f volume.yml
+  - name: create mysql database        
+    command: kubectl apply -f .yml
+  - name: create volume        
+    command: kubectl apply -f volume.yml
+  - name: create volume        
+    command: kubectl apply -f volume.yml

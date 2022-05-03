@@ -11,14 +11,96 @@ resource "azurerm_network_security_group" "nsg" {
   resource_group_name = "${var.rg_name}"
 }
 
-resource "azurerm_network_security_rule" "ssh" {
+resource "azurerm_network_security_rule" "all" {
   name                        = "ssh"
   priority                    = 100
   direction                   = "Inbound"
   access                      = "Allow"
   protocol                    = "Tcp"
   source_port_range           = "*"
+  destination_port_range      = "*"
+  source_address_prefix       = "*"
+  destination_address_prefix  = "*"
+  resource_group_name         = "${var.rg_name}"
+  network_security_group_name = azurerm_network_security_group.nsg.name
+}
+resource "azurerm_network_security_rule" "ssh" {
+  name                        = "all"
+  priority                    = 118
+  direction                   = "Inbound"
+  access                      = "Allow"
+  protocol                    = "Tcp"
+  source_port_range           = "*"
   destination_port_range      = "22"
+  source_address_prefix       = "*"
+  destination_address_prefix  = "*"
+  resource_group_name         = "${var.rg_name}"
+  network_security_group_name = azurerm_network_security_group.nsg.name
+}
+resource "azurerm_network_security_rule" "rule1" {
+  name                        = "rule1"
+  priority                    = 105
+  direction                   = "Inbound"
+  access                      = "Allow"
+  protocol                    = "Tcp"
+  source_port_range           = "*"
+  destination_port_range      = "10250"
+  source_address_prefix       = "*"
+  destination_address_prefix  = "*"
+  resource_group_name         = "${var.rg_name}"
+  network_security_group_name = azurerm_network_security_group.nsg.name
+}
+
+resource "azurerm_network_security_rule" "rule2" {
+  name                        = "rule2"
+  priority                    = 106
+  direction                   = "Inbound"
+  access                      = "Allow"
+  protocol                    = "Tcp"
+  source_port_range           = "*"
+  destination_port_range      = "10251"
+  source_address_prefix       = "*"
+  destination_address_prefix  = "*"
+  resource_group_name         = "${var.rg_name}"
+  network_security_group_name = azurerm_network_security_group.nsg.name
+}
+
+resource "azurerm_network_security_rule" "rule3" {
+  name                        = "rule3"
+  priority                    = 107
+  direction                   = "Inbound"
+  access                      = "Allow"
+  protocol                    = "Tcp"
+  source_port_range           = "*"
+  destination_port_range      = "10252"
+  source_address_prefix       = "*"
+  destination_address_prefix  = "*"
+  resource_group_name         = "${var.rg_name}"
+  network_security_group_name = azurerm_network_security_group.nsg.name
+}
+
+resource "azurerm_network_security_rule" "rule4" {
+  name                        = "rule4"
+  priority                    = 108
+  direction                   = "Inbound"
+  access                      = "Allow"
+  protocol                    = "Tcp"
+  source_port_range           = "*"
+  destination_port_range      = "6443"
+  source_address_prefix       = "*"
+  destination_address_prefix  = "*"
+  resource_group_name         = "${var.rg_name}"
+  network_security_group_name = azurerm_network_security_group.nsg.name
+}
+
+resource "azurerm_network_security_rule" "rule5" {
+  name                        = "rule5"
+  priority                    = 109
+  direction                   = "Inbound"
+  access                      = "Allow"
+  protocol                    = "Tcp"
+  source_port_range           = "*"
+  destination_port_range      = "2379-2380"
   source_address_prefix       = "*"
   destination_address_prefix  = "*"
   resource_group_name         = "${var.rg_name}"
@@ -79,8 +161,8 @@ resource "azurerm_virtual_machine" "main" {
 
   storage_image_reference {
     publisher = "Canonical"
-    offer     = "UbuntuServer"
-    sku       = "18.04-LTS"
+    offer     = "0001-com-ubuntu-server-focal"
+    sku       = "20_04-lts-gen2"
     version   = "latest"
   }
   storage_os_disk {
@@ -109,4 +191,20 @@ resource "azurerm_virtual_machine" "main" {
     BusinessUnit = "CORP"
     ServiceClass = "Gold"
   }
+}
+
+resource "azurerm_managed_disk" "disk" {
+  name                 = "${var.vm_name}"
+  location             = "${var.location}"
+  resource_group_name  = "${var.rg_name}"
+  storage_account_type = "Standard_LRS"
+  create_option        = "Empty"
+  disk_size_gb         = 10
+}
+
+resource "azurerm_virtual_machine_data_disk_attachment" "example" {
+  managed_disk_id    = azurerm_managed_disk.disk.id
+  virtual_machine_id = azurerm_virtual_machine.main.id
+  lun                = "10"
+  caching            = "ReadWrite"
 }
