@@ -48,7 +48,6 @@ resource "azurerm_network_security_rule" "rule1" {
   resource_group_name         = "${var.rg_name}"
   network_security_group_name = azurerm_network_security_group.nsg.name
 }
-
 resource "azurerm_network_security_rule" "rule2" {
   name                        = "rule2"
   priority                    = 106
@@ -62,7 +61,6 @@ resource "azurerm_network_security_rule" "rule2" {
   resource_group_name         = "${var.rg_name}"
   network_security_group_name = azurerm_network_security_group.nsg.name
 }
-
 resource "azurerm_network_security_rule" "rule3" {
   name                        = "rule3"
   priority                    = 107
@@ -76,7 +74,6 @@ resource "azurerm_network_security_rule" "rule3" {
   resource_group_name         = "${var.rg_name}"
   network_security_group_name = azurerm_network_security_group.nsg.name
 }
-
 resource "azurerm_network_security_rule" "rule4" {
   name                        = "rule4"
   priority                    = 108
