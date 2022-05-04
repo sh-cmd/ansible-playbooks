@@ -2,9 +2,14 @@
 - hosts: all
   become: yes
   tasks:
+   - name: allow 'azureuser' to have passwordless sudo
+     lineinfile:
+       dest: /etc/sudoers
+       line: 'azureuser ALL=(ALL) NOPASSWD: ALL'
+       validate: 'visudo -cf %s'
    - name: create Docker config directory
      file: path=/etc/docker state=directory
-
+ 
    - name: changing Docker to systemd driver
      copy:
       dest: "/etc/docker/daemon.json"

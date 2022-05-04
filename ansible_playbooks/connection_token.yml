@@ -12,10 +12,8 @@
         join_command: "{{ join_command_raw.stdout_lines[0] }}"
    
     - debug: msg="{{ join_command }}"
-
 - hosts: worker_node
   become: yes
-  become_user: root
   tasks:
     - name: join cluster
       shell: "{{ hostvars['master'].join_command }} >> node_joined.txt"

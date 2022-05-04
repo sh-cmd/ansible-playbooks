@@ -3,10 +3,10 @@
   become: true
   tasks:
   - name: create volume
-    command: kubectl apply -f volume.yml
+    command: kubectl create -f volume.yml
   - name: create mysql database        
-    command: kubectl apply -f .yml
-  - name: create volume        
-    command: kubectl apply -f volume.yml
-  - name: create volume        
-    command: kubectl apply -f volume.yml
+    command: kubectl create -f mysql.yml
+  - name: create backend deployment        
+    command: kubectl create -f backend.yml
+  - name: create frontend deployment       
+    command: kubectl create -f frontend.yml

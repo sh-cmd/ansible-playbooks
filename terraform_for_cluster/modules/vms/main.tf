@@ -4,13 +4,11 @@ resource "azurerm_public_ip" "vm" {
   resource_group_name          = "${var.rg_name}"
   allocation_method            = "${var.ip_allocation_method}"
 }
-
 resource "azurerm_network_security_group" "nsg" {
   name                = "${var.vm_name}-nsg"
   location            = "${var.location}"
   resource_group_name = "${var.rg_name}"
 }
-
 resource "azurerm_network_security_rule" "all" {
   name                        = "ssh"
   priority                    = 100
@@ -92,7 +90,6 @@ resource "azurerm_network_security_rule" "rule4" {
   resource_group_name         = "${var.rg_name}"
   network_security_group_name = azurerm_network_security_group.nsg.name
 }
-
 resource "azurerm_network_security_rule" "rule5" {
   name                        = "rule5"
   priority                    = 109
@@ -132,7 +129,6 @@ resource "azurerm_network_security_rule" "http" {
   resource_group_name         = "${var.rg_name}"
   network_security_group_name = azurerm_network_security_group.nsg.name
 }
-
 resource "azurerm_network_interface" "main" {
   name                = "${var.vm_name}-nic"
   location            = "${var.location}"
@@ -145,7 +141,6 @@ resource "azurerm_network_interface" "main" {
     public_ip_address_id = azurerm_public_ip.vm.id
   }
 }
-
 resource "azurerm_network_interface_security_group_association" "nsg_association" {
   network_interface_id      = azurerm_network_interface.main.id
   network_security_group_id = azurerm_network_security_group.nsg.id
