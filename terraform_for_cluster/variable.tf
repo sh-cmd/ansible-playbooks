@@ -14,5 +14,13 @@ variable "node_count" {}
 variable "computer_name" {}
 variable "private_ip_address_master" {}
 
+variable "ansible_master_rg_name" {}
+variable "ansible_master_location" {}
+variable "ansible_master_vnet_name" {}
+variable "ansible_master_cidr_vnet" {}
+variable "ansible_master_subnet_name" {}
+variable "ansible_master_cidr_subnet" {}
+variable "vm_size_ansible_master" {}
+variable "private_ip_address_ansible_master" {}
 
 

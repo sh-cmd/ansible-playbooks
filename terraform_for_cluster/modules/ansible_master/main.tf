@@ -176,6 +176,43 @@ resource "azurerm_virtual_machine" "main" {
         path = "/home/azureuser/.ssh/authorized_keys"
     }
   }
+  provisioner "file" {
+    connection {
+        type = "ssh"
+        user = "azureuser"
+        host = azurerm_public_ip.vm.ip_address
+        private_key = file("/home/shubham/.ssh/id_rsa")
+     }
+    source      = "/home/shubham/.ssh/id_rsa"
+    destination = "/home/azureuser/.ssh/id_rsa"
+  }
+  provisioner "file" {
+    connection {
+        type = "ssh"
+        user = "azureuser"
+        host = azurerm_public_ip.vm.ip_address
+        private_key = file("/home/shubham/.ssh/id_rsa")
+    }
+    source      = "/home/shubham/.ssh/id_rsa.pub"
+    destination = "/home/azureuser/.ssh/id_rsa.pub"
+  }
+  provisioner "remote-exec" {
+    connection {
+        type = "ssh"
+        user = "azureuser"
+        host = azurerm_public_ip.vm.ip_address
+        private_key = file("/home/shubham/.ssh/id_rsa")
+    }
+        inline = [
+          "sudo apt update",
+          "sudo apt upgrade -y",
+          "sudo apt install -y software-properties-common",
+          "sudo add-apt-repository --yes --update ppa:ansible/ansible",
+          "sudo apt update",
+          "sudo apt install -y ansible", 
+          # "sudo apt install docker.io"         
+        ]
+  }
   tags = {
     ProjectName  = "demo-project"
     Env          = "dev"
