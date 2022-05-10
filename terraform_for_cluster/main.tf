@@ -36,20 +36,20 @@ module "ansible-master"{
   private_ip_address = var.private_ip_address_ansible_master
 }
 
-resource "azurerm_virtual_machine_extension" "test" {
-  name                 = "hostname"
-  virtual_machine_id =  module.ansible-master.vm_id
-  publisher            = "Microsoft.Azure.Extensions"
-  type                 = "CustomScript"
-  type_handler_version = "2.0"
+# resource "azurerm_virtual_machine_extension" "test" {
+#   name                 = "hostname"
+#   virtual_machine_id =  module.ansible-master.vm_id
+#   publisher            = "Microsoft.Azure.Extensions"
+#   type                 = "CustomScript"
+#   type_handler_version = "2.0"
 
-  settings = <<SETTINGS
-  {
-     "commandToExecute": "ssh-keygen -t rsa -f ~/.ssh/id_rsa <<< y"
-  }
-SETTINGS
+#   settings = <<SETTINGS
+#   {
+#      "commandToExecute": "ssh-keygen -t rsa -f ~/.ssh/id_rsa <<< y"
+#   }
+# SETTINGS
 
-}
+# }
  module "virtual-machine-master" {
   depends_on = [
     module.vnet
