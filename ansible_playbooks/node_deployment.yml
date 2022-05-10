@@ -1,12 +1,14 @@
 ---
 - hosts: master_node
-  become: true
+  become: false
   tasks:
   - name: create volume
-    command: kubectl create -f volume.yml
+    shell: chdir=/var/lib/jenkins/workspace/ansible_infrastructure_terraform/kubernetes kubectl create -f volume.yml
   - name: create mysql database        
-    command: kubectl create -f mysql.yml
+    shell: chdir=/var/lib/jenkins/workspace/ansible_infrastructure_terraform/kubernetes kubectl create -f mysql.yml
+  - name: delay
+    shell: sleep 50
   - name: create backend deployment        
-    command: kubectl create -f backend.yml
+    shell: chdir=/var/lib/jenkins/workspace/ansible_infrastructure_terraform/kubernetes kubectl create -f backend.yml
   - name: create frontend deployment       
-    command: kubectl create -f frontend.yml
+    shell: chdir=/var/lib/jenkins/workspace/ansible_infrastructure_terraform/kubernetes kubectl create -f frontend.yml

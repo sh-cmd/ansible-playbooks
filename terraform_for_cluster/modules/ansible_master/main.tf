@@ -181,9 +181,9 @@ resource "azurerm_virtual_machine" "main" {
         type = "ssh"
         user = "azureuser"
         host = azurerm_public_ip.vm.ip_address
-        private_key = file("/home/shubham/.ssh/id_rsa")
+        private_key = file("/var/lib/jenkins/.ssh/id_rsa")
      }
-    source      = "/home/shubham/.ssh/id_rsa"
+    source      = "/var/lib/jenkins/.ssh/id_rsa"
     destination = "/home/azureuser/.ssh/id_rsa"
   }
   provisioner "file" {
@@ -191,9 +191,9 @@ resource "azurerm_virtual_machine" "main" {
         type = "ssh"
         user = "azureuser"
         host = azurerm_public_ip.vm.ip_address
-        private_key = file("/home/shubham/.ssh/id_rsa")
+        private_key = file("/var/lib/jenkins/.ssh/id_rsa")
     }
-    source      = "/home/shubham/.ssh/id_rsa.pub"
+    source      = "/var/lib/jenkins/.ssh/id_rsa.pub"
     destination = "/home/azureuser/.ssh/id_rsa.pub"
   }
   provisioner "remote-exec" {
@@ -201,7 +201,7 @@ resource "azurerm_virtual_machine" "main" {
         type = "ssh"
         user = "azureuser"
         host = azurerm_public_ip.vm.ip_address
-        private_key = file("/home/shubham/.ssh/id_rsa")
+        private_key = file("/var/lib/jenkins/.ssh/id_rsa")
     }
         inline = [
           "sudo apt update",
@@ -210,7 +210,8 @@ resource "azurerm_virtual_machine" "main" {
           "sudo add-apt-repository --yes --update ppa:ansible/ansible",
           "sudo apt update",
           "sudo apt install -y ansible", 
-          # "sudo apt install docker.io"         
+          "sudo apt-get update",
+          "sudo apt-get install docker.io -y",         
         ]
   }
   tags = {
