@@ -1,13 +1,13 @@
-# module "vnet" {
-#     source = "./modules/vnet"
-#     vnet_name = var.vnet_name
-#     rg_name = var.rg_name
-#     location = var.location
-#     subnet_name = var.subnet_name
-#     cidr_vnet = var.cidr_vnet
-#     cidr_subnet = var.cidr_subnet
+module "vnet" {
+    source = "./modules/vnet"
+    vnet_name = var.vnet_name
+    rg_name = var.rg_name
+    location = var.location
+    subnet_name = var.subnet_name
+    cidr_vnet = var.cidr_vnet
+    cidr_subnet = var.cidr_subnet
   
-# }
+}
 
 module "ansible_master_vnet" {
     source = "./modules/vnet"
