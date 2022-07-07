@@ -4,3 +4,17 @@ metadata:
   name: sqldemo-ebs-sc
 provisioner: ebs.csi.aws.com
 volumeBindingMode: WaitForFirstConsumer
+
+---
+
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: ebs-mysql-pv-claim
+spec:
+  accessModes:
+    - ReadWriteOnce
+  storageClassName: sqldemo-ebs-sc
+  resources:
+    requests:
+      storage: 2Gi
