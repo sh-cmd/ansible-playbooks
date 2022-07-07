@@ -10,7 +10,7 @@ volumeBindingMode: WaitForFirstConsumer
 apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
-  name: ebs-mysql-pv-claim
+  name: mysql-pv-claim
 spec:
   accessModes:
     - ReadWriteOnce
